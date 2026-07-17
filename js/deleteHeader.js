@@ -1,12 +1,13 @@
-// ========== Xóa Header xác thực ========== //
-// @nguyencongan
+/***********************************************
+> deleteHeader by nguyencongan
+***********************************************/
 
-delete $request.headers["Authorization"];
-delete $request.headers["authorization"];
-delete $request.headers["X-Platform"];
-delete $request.headers["x-platform"];
+const version = 'V1.0.2';
 
-$done({
-  headers: $request.headers,
-  body: $request.body || "{}"
-});
+function setHeaderValue(e, a, d) {
+  var r = a.toLowerCase();
+  r in e ? e[r] = d : e[a] = d
+}
+var modifiedHeaders = $request.headers;
+setHeaderValue(modifiedHeaders, "X-RevenueCat-ETag", "");
+$done({ headers: modifiedHeaders });
